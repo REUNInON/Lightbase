@@ -1,0 +1,44 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<EditCatransaction> L
+@page "/edit-catransaction"
+
+<PageTitle>Edit Catransaction</PageTitle>
+
+    <RadzenColumn SizeMD=12>
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Catransaction</RadzenAlert>
+        <RadzenTemplateForm TItem="Lightbase.Models.inventory.Catransaction" Data="@(catransaction)" Visible="@(catransaction != null)" Submit="@FormSubmit">
+          <RadzenStack>
+            <RadzenFormField Text="Code" Variant="Variant.Outlined">
+                  <ChildContent>
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(catransaction.Code)" Name="Code"/>
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Type" Variant="Variant.Outlined">
+                  <ChildContent>
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(catransaction.Type)" Name="Type" />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Amount" Variant="Variant.Outlined">
+                  <ChildContent>
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(catransaction.Amount)" Name="Amount"/>
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Current Account" Variant="Variant.Outlined">
+                  <ChildContent>
+                    <RadzenDropDown Data="@(currentAccountsForCurrentAccountId)" TextProperty="Description" ValueProperty="Id" AllowClear=true
+                          style="display: block; width: 100%" @bind-Value="@(catransaction.CurrentAccountId)" Name="CurrentAccountId"
+                           />
+              </ChildContent>
+            </RadzenFormField>
+            <RadzenFormField Text="Date" Variant="Variant.Outlined">
+                  <ChildContent>
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(catransaction.Date)" Name="Date"/>
+              </ChildContent>
+            </RadzenFormField>
+          </RadzenStack>
+          <RadzenStack style="margin-top:1rem;" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+          </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+
