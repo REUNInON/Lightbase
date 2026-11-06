@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --rz-primary: #1b6ec2;
+  }
+}
